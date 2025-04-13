@@ -1,6 +1,6 @@
 streamlit==1.33.0
 pdfminer.six==20221105
 python-docx==1.1.0
-spacy==3.7.2
+spacy
 nltk==3.8.1
 scikit-learn
