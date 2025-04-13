@@ -12,11 +12,12 @@ from io import StringIO
 import nltk
 import subprocess
 import importlib.util
+import spacy.cli
 nltk.download('stopwords', quiet=True)
 
 # Initialize NLP model
+spacy.cli.download("en_core_web_sm")
 nlp = spacy.load("en_core_web_sm")
-
 # Load stopwords
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
