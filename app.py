@@ -10,6 +10,8 @@ from collections import Counter
 import streamlit as st
 from io import StringIO
 import nltk
+import subprocess
+import importlib.util
 nltk.download('stopwords', quiet=True)
 
 # Initialize NLP model
@@ -18,7 +20,14 @@ nlp = spacy.load("en_core_web_sm")
 # Load stopwords
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
+def is_model_installed(model_name):
+    return importlib.util.find_spec(model_name) is not None
 
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
+    nlp = spacy.load("en_core_web_sm")
 # Function to extract text from DOCX file
 def extract_text_from_docx(file) -> str:
     doc = docx.Document(file)
